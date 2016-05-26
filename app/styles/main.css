@@ -40,3 +40,21 @@ body {
     background-color: yellow;
     color: black;
  }
+ 
+ .group-list-item {
+   padding-top: 6px;
+   padding-bottom: 6px;
+   margin-bottom: 3px;
+   border-bottom: 1px solid black;
+ }
+ 
+ .group-item-sub {
+   position: relative;
+   top: -13px;
+ }
+ 
+ .group-item-select {
+   float: right;
+   position: relative;
+   top: 8px;
+ }

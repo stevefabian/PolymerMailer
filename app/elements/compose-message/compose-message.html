@@ -10,7 +10,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
 <link rel="import" href="..\..\bower_components/polymer/polymer.html">
 <link rel="import" href="..\tools/paper-editor.html">
+<link rel="import" href="..\..\bower_components/paper-item/paper-item.html">
+<link rel="import" href="..\..\bower_components/iron-list/iron-list.html">
 <link rel="import" href="..\..\bower_components/paper-input/paper-input.html">
+<link rel="import" href="..\..\bower_components/paper-card/paper-card.html">
     
 <dom-module id="compose-message">
   <template>
@@ -29,7 +32,20 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     </div>
    
     <div class="row">
-      <div class="col-md-3">Groups</div>
+      
+      <div class="col-md-3 group-listing">
+        <h3>Mailing Lists</h3>
+          <iron-list items="[[groupNames]]" as="item">
+            <template>
+              <paper-card style='cursor: pointer;'>
+                <paper-icon-button class='group-item-select' icon="add-box"></paper-icon-button>
+                <h5>[[item.GroupName]]</h5>
+                <div class='group-item-sub'>[[item.Count]] members</div>                
+              </paper-card>
+            </template>
+          </iron-list>
+      </div>
+      
       <div class="col-md-9">
         <div style="padding-right: 23px;">
           <paper-input label="From" value="debi@fabianbridge.com"></paper-input>
@@ -39,7 +55,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           <polymer-tinymce id="editor"
             width=100%"
             height="350"
-            tinytoolbar="insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image" 
+            tinytoolbar="insertfile undo redo | styleselect | bold italic fontselect fontsizeselect | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image table" 
             tinyplugins='[
               "advlist autolink lists link image charmap print preview anchor",
               "searchreplace visualblocks code fullscreen",
@@ -47,6 +63,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           </polymer-tinymce>
         </div>
       </div>
+      
     </div>
    
   </template>
@@ -58,16 +75,23 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       is: 'compose-message',
 
       properties: {
-        foo: {
-          type: String,
-          value: 'compose-message',
-          notify: true
-        }
+         groupNames: { type: Array, value: [], notify: true }
       },
       
       cancelMessage: function(){
         app.route = "home";
+      },
+      
+      ready: function() {
+        this.groupNames = [
+            {GroupId: 1, GroupName: 'All Members', Count: 87 },
+            {GroupId: 2, GroupName: 'Test List', Count: 2 },
+            {GroupId: 3, GroupName: 'Friday Afternoon', Count: 29 },
+            {GroupId: 4, GroupName: 'Monday Bridge Players', Count: 45 },
+            {GroupId: 5, GroupName: 'Monday Class', Count: 36 }
+        ];
       }
+
      
     });
   })();
