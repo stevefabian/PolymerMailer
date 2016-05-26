@@ -1,0 +1,77 @@
+<!--
+@license
+Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+
+<link rel="import" href="..\..\bower_components/polymer/polymer.html">
+
+<dom-module id="message-list">
+  
+  <template>
+    <link rel="stylesheet" href="..\..\bower_components/bootstrap/dist/css/bootstrap.css">      
+    <style>
+      :host {
+        display: block;
+      }
+    </style>
+    
+    <div class='toolbuttons'>
+      <paper-button raised on-tap="handleComposeTap"><iron-icon icon="file-download"></iron-icon>Compose</paper-button>
+      <paper-button raised><iron-icon icon="search"></iron-icon>Find</paper-button>
+    </div>
+    
+    <table class="table table-hover table-striped">
+      <thead>
+        <tr>
+          <th></th>
+          <th width="80">Date</th>
+          <th width="80">Time</th>
+          <th>Subject</th>
+          <th width="250">To</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td width="30"><input type="checkbox"></td>
+          <td>5/24/16</td>
+          <td>9:38 AM</td>
+          <td><a href="#">This is a test message</a></td>
+          <td>All Members</td>
+        </tr>
+                  <td width="30"><input type="checkbox"></td>
+          <td>5/24/16</td>
+          <td>9:38 AM</td>
+          <td><a href="#">This is a test message</a></td>
+          <td>All Members</td>
+        </tr>
+      </tbody>
+    </table>
+  </template>
+  <script>
+  (function() {
+    'use strict';
+
+    Polymer({
+      is: 'message-list',
+
+      properties: {
+        foo: {
+          type: String,
+          value: 'message-list',
+          notify: true
+        }
+      },
+      
+      handleComposeTap: function() {
+        app.route = "compose";
+      }
+
+    });
+  })();
+  </script>
+</dom-module>
