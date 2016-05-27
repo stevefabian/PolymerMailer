@@ -1,0 +1,64 @@
+<!--
+@license
+Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+
+<link rel="import" href="..\..\bower_components/polymer/polymer.html">
+
+<dom-module id="about-info">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+    </style>
+    
+    <div class="row">
+      <div class="col-md-12">
+        <h3>About</h3>
+        <p>
+          (c) 2016 Gooddogs.com, All Rights Reserved
+        </p>
+        <p>
+          <b>Contact Information:</b><br />
+          <iron-icon icon="mail"></iron-icon><a href="mailto:sfabian@gooddogs.com">sfabian@gooddogs.com</a>
+        </p>
+        <h3>Release History</h3>
+        <paper-card style='width: 100%;'>
+          <div class="card-content">
+          05-27-2016<br />
+          -- Added Release History information to the About page.  
+          </div>
+        </paper-card>
+        <paper-card style='width: 100%;'>
+          <div class="card-content">
+          05-27-2016<br />
+          -- Initial Release.  
+          </div>
+        </paper-card>
+      </div>
+    </div>
+    
+    
+  </template>
+  <script>
+  (function() {
+    'use strict';
+
+    Polymer({
+      
+      is: 'about-info',
+
+      properties: {
+       
+      }
+      
+    });
+  })();
+  </script>
+</dom-module>

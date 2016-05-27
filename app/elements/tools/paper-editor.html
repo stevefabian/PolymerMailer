@@ -101,6 +101,8 @@ Example:
               ed.on('init', function(args) {
 
                 this.fire('tiny-init');
+                this.execCommand("fontName", false, "Helvetica");
+                this.execCommand("fontSize", false, "14px");
                   
               });
 

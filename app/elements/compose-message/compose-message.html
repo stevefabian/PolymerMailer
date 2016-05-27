@@ -16,6 +16,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="..\..\bower_components/paper-card/paper-card.html">
     
 <dom-module id="compose-message">
+  
+  <script src="..\..\bower_components/jquery/dist/jquery.js"></script>
+  <script src="..\..\scripts/jquery-tags.js"></script>
+      
   <template>
     
     <style>
@@ -24,6 +28,20 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       }
     </style>
     
+    <link rel="stylesheet" href="..\..\styles/jquery-tags.css">
+    
+    <script>
+      $(document).ready(function(){
+        
+        $('#txtTo').tagsInput({
+          'width': '100%',
+          'interactive': false
+        });
+        
+      });
+
+    </script>
+    
     <div class="row">
       <div class="col-md-12 toolbar">
          <paper-button raised class="custom yellow" on-tap="cancelMessage"><iron-icon icon="close"></iron-icon>Cancel</paper-button>
@@ -31,14 +49,14 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       </div>
     </div>
    
-    <div class="row">
+    <div class="row" style="height: 100%;">
       
       <div class="col-md-3 group-listing">
         <h3>Mailing Lists</h3>
-          <iron-list items="[[groupNames]]" as="item">
+          <iron-list grid items="[[groupNames]]" as="item">
             <template>
-              <paper-card style='cursor: pointer;'>
-                <paper-icon-button class='group-item-select' icon="add-box"></paper-icon-button>
+              <paper-card on-tap="addTo" style='cursor: pointer; width: 200px; padding-left: 4px;'>
+                <paper-icon-button class='group-item-select' icon="add-circle"></paper-icon-button>
                 <h5>[[item.GroupName]]</h5>
                 <div class='group-item-sub'>[[item.Count]] members</div>                
               </paper-card>
@@ -49,17 +67,19 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       <div class="col-md-9">
         <div style="padding-right: 23px;">
           <paper-input label="From" value="debi@fabianbridge.com"></paper-input>
-          <paper-input label="To"></paper-input>
+          <br />
+          To<br />
+          <paper-input label="To" id="txtTo" style='width: 100%;'></paper-input>
           <paper-input label="Subject"></paper-input>
           <br />
           <polymer-tinymce id="editor"
-            width=100%"
+            width="100%"
             height="350"
-            tinytoolbar="insertfile undo redo | styleselect | bold italic fontselect fontsizeselect | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image table" 
+            tinytoolbar="insertfile undo redo | styleselect forecolor | bold italic fontselect fontsizeselect | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image table emoticons" 
             tinyplugins='[
               "advlist autolink lists link image charmap print preview anchor",
-              "searchreplace visualblocks code fullscreen",
-              "insertdatetime media table contextmenu paste"]'>
+              "searchreplace visualblocks code fullscreen emoticons",
+              "insertdatetime media table contextmenu paste textcolor"]'>
           </polymer-tinymce>
         </div>
       </div>
@@ -82,12 +102,17 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         app.route = "home";
       },
       
+      addTo: function(e){
+        var item = e.model.item;
+        $('#txtTo').addTag(item.GroupName);
+      },
+      
       ready: function() {
         this.groupNames = [
             {GroupId: 1, GroupName: 'All Members', Count: 87 },
             {GroupId: 2, GroupName: 'Test List', Count: 2 },
             {GroupId: 3, GroupName: 'Friday Afternoon', Count: 29 },
-            {GroupId: 4, GroupName: 'Monday Bridge Players', Count: 45 },
+            {GroupId: 4, GroupName: 'Monday Bridge Players with a long title', Count: 45 },
             {GroupId: 5, GroupName: 'Monday Class', Count: 36 }
         ];
       }
